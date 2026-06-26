@@ -29,7 +29,7 @@ The dashboard derives a live count of orders at each stage from this array every
 
 ## Core features
 
-1. Add a new order via a form, including client name, project name, drawing reference, and one or more SKU line items (product type + quantity + unit)
+1. Add a new order via a form, including client name, project name, drawing reference, and one or more SKU production items (product type + quantity + unit)
 2. Move any order forward through five production stages: Order Received, Material Sourced, In Production, Quality Check, Dispatched
 3. Add a text note at each stage transition to record what happened
 4. Live dashboard showing order count at each stage, updated on every interaction
