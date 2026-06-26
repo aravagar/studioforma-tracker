@@ -15,6 +15,7 @@
       <span class="brand-sub">Production Tracker</span>
     </div>
     <div class="header-right">
+      <span id="edit-indicator" class="edit-mode-indicator hidden">Edit Mode On</span>
       <button id="edit-mode-btn" class="btn btn-outline">Enter Edit Mode</button>
     </div>
   </header>
@@ -59,60 +60,67 @@
   <!-- MAIN LAYOUT -->
   <div class="main-layout">
 
-    <!-- SIDEBAR: ADD ORDER FORM -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <h2 class="sidebar-title">New Order</h2>
-        <button id="sidebar-toggle" class="btn btn-ghost sidebar-toggle" aria-expanded="true" aria-controls="order-form">&#x2715;</button>
+        <button id="sidebar-toggle" class="btn btn-ghost sidebar-toggle"
+          aria-expanded="true" aria-controls="order-form">&#x2715;</button>
       </div>
 
+      <!-- Shown when not in edit mode -->
+      <p class="sidebar-locked-msg" id="sidebar-locked-msg">
+        Enter edit mode to add and manage orders.
+      </p>
+
+      <!-- Order form — hidden until edit mode unlocked -->
       <form id="order-form" class="order-form" novalidate>
 
-        <!-- ORDER DETAILS -->
         <fieldset class="form-section">
           <legend>Order Details</legend>
 
           <label for="client-name">Client Name <span class="required">*</span></label>
-          <input type="text" id="client-name" name="clientName" placeholder="e.g. Sharma Family" required />
+          <input type="text" id="client-name" name="clientName"
+            placeholder="e.g. Sharma Family" required />
 
           <label for="project-name">Project Name <span class="required">*</span></label>
-          <input type="text" id="project-name" name="projectName" placeholder="e.g. Master Bedroom Wardrobe" required />
+          <input type="text" id="project-name" name="projectName"
+            placeholder="e.g. Master Bedroom Wardrobe" required />
 
           <label for="drawing-ref">Drawing Reference</label>
-          <input type="text" id="drawing-ref" name="drawingRef" placeholder="e.g. DWG-2026-041" />
+          <input type="text" id="drawing-ref" name="drawingRef"
+            placeholder="e.g. DWG-2026-041" />
 
           <label for="due-date">Due Date <span class="required">*</span></label>
           <input type="date" id="due-date" name="dueDate" required />
         </fieldset>
 
-        <!-- SKU TABLE -->
         <fieldset class="form-section">
           <legend>Items (SKUs) <span class="required">*</span></legend>
-
-          <div id="sku-list" class="sku-list">
-            <!-- SKU rows injected here by JS -->
-          </div>
-
+          <div id="sku-list" class="sku-list"></div>
           <button type="button" id="add-sku-btn" class="btn btn-ghost btn-sm">+ Add Item</button>
-          <p id="sku-error" class="field-error hidden">Add at least one item before submitting.</p>
+          <p id="sku-error" class="field-error hidden"></p>
         </fieldset>
 
-        <p id="form-error" class="field-error hidden">Please fill in all required fields.</p>
+        <p id="form-error" class="field-error hidden">
+          Please fill in all required fields marked with *.
+        </p>
         <button type="submit" class="btn btn-primary btn-full">Add Order</button>
 
       </form>
 
-      <!-- COLLAPSED STATE: show when sidebar is closed -->
-      <button id="sidebar-open-btn" class="btn btn-primary sidebar-open-btn hidden">+ New Order</button>
+      <!-- Collapsed open button -->
+      <button id="sidebar-open-btn" class="btn btn-primary sidebar-open-btn hidden">
+        + New Order
+      </button>
     </aside>
 
-    <!-- BOARD: ORDER LIST -->
+    <!-- BOARD -->
     <main class="board" aria-label="Active orders">
 
-      <!-- BOARD CONTROLS -->
       <div class="board-controls">
         <div class="board-controls-left">
-          <label for="filter-stage" class="filter-label">Filter by stage:</label>
+          <label for="filter-stage" class="filter-label">Filter:</label>
           <select id="filter-stage" class="filter-select">
             <option value="All">All Active Orders</option>
             <option value="Order Received">Order Received</option>
@@ -127,17 +135,18 @@
         </div>
       </div>
 
-      <!-- ACTIVE ORDERS -->
+      <!-- Active orders -->
       <div id="orders-container" class="orders-container">
-        <!-- Empty state -->
         <div id="empty-state" class="empty-state">
           <p class="empty-title">No active orders</p>
-          <p class="empty-sub">Enter edit mode and add your first order, or load sample data to see how the tracker works.</p>
+          <p class="empty-sub">
+            Enter edit mode to add your first order, or load sample data to see how the tracker works.
+          </p>
           <button id="empty-load-sample" class="btn btn-outline">Load Sample Data</button>
         </div>
       </div>
 
-      <!-- COMPLETED ORDERS -->
+      <!-- Completed orders -->
       <section class="completed-section" aria-label="Completed orders">
         <h2 class="section-title">Completed Orders</h2>
         <div id="completed-container" class="completed-container">
