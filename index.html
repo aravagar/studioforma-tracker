@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studioforma Production Tracker</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-left">
+      <span class="brand">Studioforma</span>
+      <span class="brand-sub">Production Tracker</span>
+    </div>
+    <div class="header-right">
+      <button id="edit-mode-btn" class="btn btn-outline">Enter Edit Mode</button>
+    </div>
+  </header>
+
+  <!-- PIN OVERLAY -->
+  <div id="pin-overlay" class="pin-overlay hidden">
+    <div class="pin-box">
+      <p class="pin-label">Enter PIN to enable editing</p>
+      <input type="password" id="pin-input" class="pin-input" placeholder="PIN" maxlength="6" />
+      <p id="pin-error" class="pin-error hidden">Incorrect PIN. Try again.</p>
+      <div class="pin-actions">
+        <button id="pin-submit" class="btn btn-primary">Unlock</button>
+        <button id="pin-cancel" class="btn btn-ghost">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <section class="dashboard" aria-label="Order stage summary">
+    <div class="dash-card" id="dash-total">
+      <span class="dash-count" id="count-total">0</span>
+      <span class="dash-label">Active Orders</span>
+    </div>
+    <div class="dash-card">
+      <span class="dash-count" id="count-received">0</span>
+      <span class="dash-label">Order Received</span>
+    </div>
+    <div class="dash-card">
+      <span class="dash-count" id="count-material">0</span>
+      <span class="dash-label">Material Sourced</span>
+    </div>
+    <div class="dash-card">
+      <span class="dash-count" id="count-production">0</span>
+      <span class="dash-label">In Production</span>
+    </div>
+    <div class="dash-card">
+      <span class="dash-count" id="count-qc">0</span>
+      <span class="dash-label">Quality Check</span>
+    </div>
+  </section>
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+
+    <!-- SIDEBAR: ADD ORDER FORM -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">New Order</h2>
+        <button id="sidebar-toggle" class="btn btn-ghost sidebar-toggle" aria-expanded="true" aria-controls="order-form">&#x2715;</button>
+      </div>
+
+      <form id="order-form" class="order-form" novalidate>
+
+        <!-- ORDER DETAILS -->
+        <fieldset class="form-section">
+          <legend>Order Details</legend>
+
+          <label for="client-name">Client Name <span class="required">*</span></label>
+          <input type="text" id="client-name" name="clientName" placeholder="e.g. Sharma Family" required />
+
+          <label for="project-name">Project Name <span class="required">*</span></label>
+          <input type="text" id="project-name" name="projectName" placeholder="e.g. Master Bedroom Wardrobe" required />
+
+          <label for="drawing-ref">Drawing Reference</label>
+          <input type="text" id="drawing-ref" name="drawingRef" placeholder="e.g. DWG-2026-041" />
+
+          <label for="due-date">Due Date <span class="required">*</span></label>
+          <input type="date" id="due-date" name="dueDate" required />
+        </fieldset>
+
+        <!-- SKU TABLE -->
+        <fieldset class="form-section">
+          <legend>Items (SKUs) <span class="required">*</span></legend>
+
+          <div id="sku-list" class="sku-list">
+            <!-- SKU rows injected here by JS -->
+          </div>
+
+          <button type="button" id="add-sku-btn" class="btn btn-ghost btn-sm">+ Add Item</button>
+          <p id="sku-error" class="field-error hidden">Add at least one item before submitting.</p>
+        </fieldset>
+
+        <p id="form-error" class="field-error hidden">Please fill in all required fields.</p>
+        <button type="submit" class="btn btn-primary btn-full">Add Order</button>
+
+      </form>
+
+      <!-- COLLAPSED STATE: show when sidebar is closed -->
+      <button id="sidebar-open-btn" class="btn btn-primary sidebar-open-btn hidden">+ New Order</button>
+    </aside>
+
+    <!-- BOARD: ORDER LIST -->
+    <main class="board" aria-label="Active orders">
+
+      <!-- BOARD CONTROLS -->
+      <div class="board-controls">
+        <div class="board-controls-left">
+          <label for="filter-stage" class="filter-label">Filter by stage:</label>
+          <select id="filter-stage" class="filter-select">
+            <option value="All">All Active Orders</option>
+            <option value="Order Received">Order Received</option>
+            <option value="Material Sourced">Material Sourced</option>
+            <option value="In Production">In Production</option>
+            <option value="Quality Check">Quality Check</option>
+          </select>
+        </div>
+        <div class="board-controls-right">
+          <button id="load-sample-btn" class="btn btn-ghost btn-sm">Load Sample Data</button>
+          <button id="reset-btn" class="btn btn-danger btn-sm hidden">Clear Completed</button>
+        </div>
+      </div>
+
+      <!-- ACTIVE ORDERS -->
+      <div id="orders-container" class="orders-container">
+        <!-- Empty state -->
+        <div id="empty-state" class="empty-state">
+          <p class="empty-title">No active orders</p>
+          <p class="empty-sub">Enter edit mode and add your first order, or load sample data to see how the tracker works.</p>
+          <button id="empty-load-sample" class="btn btn-outline">Load Sample Data</button>
+        </div>
+      </div>
+
+      <!-- COMPLETED ORDERS -->
+      <section class="completed-section" aria-label="Completed orders">
+        <h2 class="section-title">Completed Orders</h2>
+        <div id="completed-container" class="completed-container">
+          <p class="empty-sub" id="completed-empty">No completed orders yet.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
