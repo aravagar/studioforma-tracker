@@ -1,6 +1,6 @@
 # Studioforma Production Tracker
 
-A browser-based order tracking tool built for Studioforma Industries, a modular furniture manufacturer based in Delhi. The tracker gives the production team a real-time view of every active order, its SKUs, current production stage, and delivery deadline -- replacing a physical whiteboard system that was causing priority mix-ups and delays.
+A browser-based order tracking tool built for Studioforma Industries, a modular furniture manufacturer based in Delhi. The tracker gives the production team a real-time view of every active order, its SKUs, current production stage, and delivery deadline, replacing a physical whiteboard system that was causing priority mix-ups and delays.
 
 **Live site:** [aravagar.github.io/studioforma-tracker](https://aravagar.github.io/studioforma-tracker)
 
@@ -16,26 +16,29 @@ Studioforma's production floor was managed using a physical whiteboard. With mul
 
 ## Who Uses It
 
-| User | Role |
-|---|---|
-| Mr. Laxman | Production Head -- adds orders, advances stages, logs notes |
-| Abhiroop Agarwal | Director -- monitors the board in view mode |
-| Production Team | Floor staff -- checks order status in view mode |
-| Client | Checks production status in view mode |
+| User             | Role                                                        |
+| ---------------- | ----------------------------------------------------------- |
+| Mr. Laxman       | Production Head -- adds orders, advances stages, logs notes |
+| Abhiroop Agarwal | Director -- monitors the board in view mode                 |
+| Production Team  | Floor staff -- checks order status in view mode             |
+| Client           | Checks production status in view mode                       |
 
 ---
 
 ## How to Use It
 
 ### View Mode (default)
+
 Open the live URL. The dashboard and all active orders are visible immediately. No login required.
 
 ### Edit Mode
+
 Click **Enter Edit Mode** in the top right. Enter PIN: **SF2026**. This unlocks the Add Order form and stage controls.
 
 To exit edit mode, click **Exit Edit Mode**.
 
 ### Adding an Order
+
 1. Enter edit mode
 2. Fill in Client Name, Project Name, Drawing Reference, and Due Date
 3. Add one or more SKU line items (product type, quantity, unit, size, thickness, material)
@@ -44,6 +47,7 @@ To exit edit mode, click **Exit Edit Mode**.
 The order appears on the board immediately under **Order Received**. A green flash confirms it was added.
 
 ### Moving an Order Through Stages
+
 Each active order card has a **Move to [Next Stage]** button in edit mode. Optionally type a stage note before advancing. The five main stages are:
 
 1. Order Received
@@ -53,6 +57,7 @@ Each active order card has a **Move to [Next Stage]** button in edit mode. Optio
 5. Dispatched (moves to Completed section)
 
 ### In Production Sub-Stages
+
 When an order reaches **In Production**, a segmented progress track appears inside the card:
 
 **Carpentry > Painting > Finishing**
@@ -60,15 +65,19 @@ When an order reaches **In Production**, a segmented progress track appears insi
 Advance through each sub-stage one at a time. The **Move to Quality Check** button is locked until the order reaches **Finishing**. This prevents orders from skipping production steps.
 
 ### Filtering
+
 Use the **Filter** dropdown above the board to show only orders at a specific stage. Dashboard counts always reflect the full state regardless of filter.
 
 ### Completed Orders
+
 Dispatched orders move to the **Completed Orders** section at the bottom. Click any completed card to expand it and see the full stage history and notes.
 
 ### Reset
+
 In edit mode, a **Clear Completed** button appears when there are dispatched orders. It requires a two-step inline confirmation before executing. Active orders are never affected by reset.
 
 ### Load Sample Data
+
 Click **Load Sample Data** (visible on the empty state or in the board controls) to populate the board with 4 active orders across different stages and 2 completed orders. Useful for demos. Sample data will not overwrite orders you have already added.
 
 ---
@@ -76,6 +85,7 @@ Click **Load Sample Data** (visible on the empty state or in the board controls)
 ## Features
 
 ### Core
+
 - Add orders with multiple SKU line items per order
 - Each order tracks: client name, project name, drawing reference, due date, SKUs, stage notes, and sub-stage
 - Five main production stages with optional notes at each transition
@@ -88,12 +98,14 @@ Click **Load Sample Data** (visible on the empty state or in the board controls)
 - PIN-gated edit mode (symbolic barrier, not authentication)
 
 ### Data and State
+
 - All state held in a JavaScript array of order objects
 - Every interaction reads from and writes to the same array
 - Derived output (dashboard counts, overdue flags, filter results) computed from state on every render
 - localStorage persistence: orders survive page refresh, stored as JSON, loaded on init with try/catch fallback
 
 ### UX Polish
+
 - New order card flashes green on add
 - Dashboard counts animate on change
 - Stage progress bar on every active order card
@@ -199,4 +211,4 @@ studioforma-tracker/
 
 ---
 
-*Mini Project 2 -- OIM3690 AI-Powered Web Development, Summer 2026, Babson College*
+_Mini Project 2 -- OIM3690 AI-Powered Web Development, Summer 2026, Babson College_
